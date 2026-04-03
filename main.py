@@ -201,6 +201,14 @@ if __name__ == "__main__":
     print("Author: " + config.get("author", "Unknown"))
     print("=" * 60)
 
+    if config.get("description"):
+        print(f"\n{config['description']}")
+
+    if config.get("background"):
+        print(f"\n--- BACKGROUND ---\n")
+        print(config["background"])
+
+    input("\nPress Enter to create your character...")
     player = Player()
     print(f"\nYour character has been created:")
     print(f"  SKILL:   {player.skill}")

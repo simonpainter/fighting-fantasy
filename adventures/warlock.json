@@ -95,6 +95,11 @@
 
     "298": {
         "description": "The bridge is slippery from the splashings of the water. At one point you slip on a tuft of wet moss covering the timbers. Roll one die. A roll of 6 means you slip from the bridge into the water below and start swimming for the nearest bank – turn to 86. Any other roll is lucky; you managed to hold on and you reach the north bank (turn to 7).",
+        "mechanic": "dice_roll",
+        "mechanic_data": {
+            "dice": 1,
+            "fail_values": [6]
+        },
         "exits": {
             "lucky": "7",
             "unlucky": "86"

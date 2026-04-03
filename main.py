@@ -106,7 +106,11 @@ class Player:
             if "lucky" in self.location.exits and "unlucky" in self.location.exits:
                 input("\nPress Enter to Test your Luck...")
                 next_id = str(self.location.exits["lucky"] if self.test_luck() else self.location.exits["unlucky"])
-                self.location = Location(next_id, adventure)
+                try:
+                    self.location = Location(next_id, adventure)
+                except KeyError as e:
+                    print(f"\n  {e}")
+                    break
                 continue
 
             print(f"\nExits: {', '.join(self.location.exits.keys())}")
@@ -119,7 +123,11 @@ class Player:
                 break
 
             if choice in self.location.exits:
-                self.location = Location(str(self.location.exits[choice]), adventure)
+                try:
+                    self.location = Location(str(self.location.exits[choice]), adventure)
+                except KeyError as e:
+                    print(f"\n  {e}")
+                    break
             else:
                 print(f"  You can't go that way. Choose from: {', '.join(self.location.exits.keys())}")
 
@@ -129,7 +137,9 @@ class Player:
 
 class Location:
     def __init__(self, location_id, adventure):
-        data = adventure[location_id]
+        data = adventure.get(location_id)
+        if data is None:
+            raise KeyError(f"Section {location_id} has not yet been added to this adventure.")
         self.id = location_id
         self.description = data["description"]
         self.exits = data["exits"]

@@ -81,7 +81,7 @@ class Player:
 
         return self.stamina > 0
 
-    def move(self, adventure):
+    def play(self, adventure):
         self.location = Location("1", adventure)
 
         while self.stamina > 0:
@@ -174,6 +174,6 @@ if __name__ == "__main__":
     print(f"  LUCK:    {player.luck}")
     print(f"\nYour adventure begins...\n")
 
-    player.move(adventure)
+    player.play(adventure)
 
 

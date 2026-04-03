@@ -11,6 +11,9 @@ class Player:
         self.luck = random.randint(1, 6) + 6
         self.location = None
 
+    def roll_die(self, num_dice=1):
+        return sum(random.randint(1, 6) for _ in range(num_dice))
+
     def test_luck(self):
         roll = random.randint(1, 6) + random.randint(1, 6)
         lucky = roll <= self.luck
@@ -104,8 +107,18 @@ class Player:
                 break
 
             if "lucky" in self.location.exits and "unlucky" in self.location.exits:
-                input("\nPress Enter to Test your Luck...")
-                next_id = str(self.location.exits["lucky"] if self.test_luck() else self.location.exits["unlucky"])
+                if self.location.mechanic == "dice_roll":
+                    num_dice = self.location.mechanic_data.get("dice", 1)
+                    fail_values = self.location.mechanic_data.get("fail_values", [])
+                    input(f"\nPress Enter to roll {num_dice} die/dice...")
+                    roll = self.roll_die(num_dice)
+                    print(f"\n  You rolled: {roll}")
+                    passed = roll not in fail_values
+                    next_id = str(self.location.exits["lucky"] if passed else self.location.exits["unlucky"])
+                    print(f"  {'You keep your footing!' if passed else 'You slip!'}")
+                else:
+                    input("\nPress Enter to Test your Luck...")
+                    next_id = str(self.location.exits["lucky"] if self.test_luck() else self.location.exits["unlucky"])
                 try:
                     self.location = Location(next_id, adventure)
                 except KeyError as e:
@@ -144,6 +157,8 @@ class Location:
         self.id = location_id
         self.description = data["description"]
         self.exits = data["exits"]
+        self.mechanic = data.get("mechanic")
+        self.mechanic_data = data.get("mechanic_data", {})
         self.monsters = [
             Monster(m["name"], m["skill"], m["stamina"]) for m in data["monsters"]
         ]

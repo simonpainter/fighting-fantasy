@@ -116,7 +116,15 @@ class Player:
                     passed = roll not in fail_values
                     next_id = str(self.location.exits["lucky"] if passed else self.location.exits["unlucky"])
                     print(f"  {'You keep your footing!' if passed else 'You slip!'}")
-                else:
+                elif self.location.mechanic == "test_stamina":
+                    num_dice = self.location.mechanic_data.get("dice", 2)
+                    input(f"\nPress Enter to test your Stamina...")
+                    roll = self.roll_die(num_dice)
+                    passed = roll <= self.stamina
+                    print(f"\n  You rolled: {roll} against STAMINA {self.stamina}")
+                    print(f"  {'You make it!' if passed else 'You cannot make it.'}")
+                    next_id = str(self.location.exits["lucky"] if passed else self.location.exits["unlucky"])
+                elif self.location.mechanic == "test_luck":
                     input("\nPress Enter to Test your Luck...")
                     next_id = str(self.location.exits["lucky"] if self.test_luck() else self.location.exits["unlucky"])
                 try:

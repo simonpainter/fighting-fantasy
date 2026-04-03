@@ -7,7 +7,7 @@ import time
 class Player:
     def __init__(self):
         self.skill = random.randint(1, 6) + 6
-        self.stamina = random.randint(2, 12) + 12
+        self.stamina = random.randint(1, 6) + random.randint(1, 6) + 12
         self.luck = random.randint(1, 6) + 6
 
     def test_luck(self):
@@ -30,8 +30,8 @@ class Player:
             print(f"  You:     SKILL={self.skill}  STAMINA={self.stamina}  LUCK={self.luck}")
             print(f"  Monster: SKILL={monster.skill}  STAMINA={monster.stamina}")
 
-            player_roll = random.randint(2, 12)
-            monster_roll = random.randint(2, 12)
+            player_roll = random.randint(1, 6) + random.randint(1, 6)
+            monster_roll = random.randint(1, 6) + random.randint(1, 6)
             player_attack = player_roll + self.skill
             monster_attack = monster_roll + monster.skill
 

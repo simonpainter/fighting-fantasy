@@ -17,6 +17,7 @@
 
     "71": {
         "description": "There is a right-hand turn to the north in the passage. Cautiously you approach a sentry post on the corner and, as you look in, you can see a strange Goblin-like creature in leather armour asleep at his post. You try to tiptoe past him. Test your Luck. If you are Lucky, he does not wake up and remains snoring loudly - turn to 301. If you are Unlucky, you step with a crunch on some loose ground and his eyes flick open - turn to 248.",
+        "mechanic": "test_luck",
         "exits": {
             "lucky": "301",
             "unlucky": "248"
@@ -42,6 +43,7 @@
 
     "74": {
         "description": "Test your Luck. If you are Lucky, you break his gaze and can prepare to attack. Turn to 279. If you are Unlucky, as you move over towards the second body, you accidentally kick the third corpse on the floor. Its eyes flick open and it quickly sits up and slashes at you with its long, sharp fingernails. Test your Luck. If you are Lucky, the creature misses. If you are Unlucky, it has caught you across the leg and you suffer 1 STAMINA point's worth of damage. Turn to 230.",
+        "mechanic": "test_luck",
         "exits": {
             "lucky": "279",
             "unlucky": "230"
@@ -168,6 +170,7 @@
 
     "305": {
         "description": "Test your Luck three times. If you are Lucky each time, you make it across to the far door and can leave the room. Turn to 162. On the first throw that you are Unlucky, you step on a hand tile – turn to 108.",
+        "mechanic": "test_luck",
         "exits": {
             "lucky": "162",
             "unlucky": "108"
@@ -281,6 +284,10 @@
 
     "316": {
         "description": "The water is icy cold. You start to swim and notice that your splashings are attracting a moving 'turbulence' in the water. Will your strength and stamina hold out? Roll two dice. If the roll is equal to or less than your STAMINA score, you can make it and swim furiously for the north bank – turn to 151. If the roll totals more than your STAMINA score, you decide not to risk it and return to the south bank – turn to 218. You may eat Provisions on the south bank.",
+        "mechanic": "test_stamina",
+        "mechanic_data": {
+            "dice": 2
+        },
         "exits": {
             "lucky": "151",
             "unlucky": "218"

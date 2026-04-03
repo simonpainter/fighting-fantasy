@@ -76,6 +76,17 @@ class Player:
         return self.stamina > 0
 
 
+class Location:
+    def __init__(self, location_id, adventure):
+        data = adventure[location_id]
+        self.id = location_id
+        self.description = data["description"]
+        self.exits = data["exits"]
+        self.monsters = [
+            Monster(m["skill"], m["stamina"]) for m in data["monsters"]
+        ]
+
+
 class Monster:
     def __init__(self, skill, stamina):
         self.skill = skill
@@ -100,9 +111,10 @@ if __name__ == "__main__":
         sys.exit(1)
 
     player = Player()
-    print("=" * 40)
-    print("  Welcome to Fighting Fantasy!")
-    print("=" * 40)
+    print("=" * 60)
+    print("Welcome to " + adventure.get("config", {}).get("title", "the adventure") + "!")
+    print("Author: " + adventure.get("config", {}).get("author", "Unknown"))    
+    print("=" * 60)
     print(f"\nYour character has been created:")
     print(f"  SKILL:   {player.skill}")
     print(f"  STAMINA: {player.stamina}")

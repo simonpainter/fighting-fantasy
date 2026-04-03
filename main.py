@@ -9,6 +9,7 @@ class Player:
         self.skill = random.randint(1, 6) + 6
         self.stamina = random.randint(1, 6) + random.randint(1, 6) + 12
         self.luck = random.randint(1, 6) + 6
+        self.location = None
 
     def test_luck(self):
         roll = random.randint(1, 6) + random.randint(1, 6)
@@ -80,6 +81,51 @@ class Player:
 
         return self.stamina > 0
 
+    def move(self, adventure):
+        self.location = Location("1", adventure)
+
+        while self.stamina > 0:
+            print("\n" + "=" * 60)
+            print(self.location.description)
+
+            for monster in self.location.monsters:
+                if monster.stamina > 0:
+                    print(f"\nA {monster.name} blocks your path! (SKILL {monster.skill}, STAMINA {monster.stamina})")
+                    input("Press Enter to fight...")
+                    self.fight(monster)
+                    if self.stamina <= 0:
+                        break
+
+            if self.stamina <= 0:
+                break
+
+            if not self.location.exits:
+                print("\nYour quest is complete. Well done, adventurer!")
+                break
+
+            if "lucky" in self.location.exits and "unlucky" in self.location.exits:
+                input("\nPress Enter to Test your Luck...")
+                next_id = str(self.location.exits["lucky"] if self.test_luck() else self.location.exits["unlucky"])
+                self.location = Location(next_id, adventure)
+                continue
+
+            print(f"\nExits: {', '.join(self.location.exits.keys())}")
+            print(f"  SKILL={self.skill}  STAMINA={self.stamina}  LUCK={self.luck}")
+
+            try:
+                choice = input("\nWhich direction? ").strip().upper()
+            except (EOFError, KeyboardInterrupt):
+                print("\n\nFarewell, adventurer.")
+                break
+
+            if choice in self.location.exits:
+                self.location = Location(str(self.location.exits[choice]), adventure)
+            else:
+                print(f"  You can't go that way. Choose from: {', '.join(self.location.exits.keys())}")
+
+        if self.stamina <= 0:
+            print("\nYou have been slain. Your adventure is over.")
+
 
 class Location:
     def __init__(self, location_id, adventure):
@@ -99,7 +145,6 @@ class Monster:
         self.stamina = stamina
 
 
-
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: python main.py <path/to/adventure.json>")
@@ -116,61 +161,19 @@ if __name__ == "__main__":
         print(f"Error: Could not parse adventure file — {e}")
         sys.exit(1)
 
+    config = adventure.get("config", {})
+    print("=" * 60)
+    print("Welcome to " + config.get("title", "the adventure") + "!")
+    print("Author: " + config.get("author", "Unknown"))
+    print("=" * 60)
+
     player = Player()
-    print("=" * 60)
-    print("Welcome to " + adventure.get("config", {}).get("title", "the adventure") + "!")
-    print("Author: " + adventure.get("config", {}).get("author", "Unknown"))
-    print("=" * 60)
     print(f"\nYour character has been created:")
     print(f"  SKILL:   {player.skill}")
     print(f"  STAMINA: {player.stamina}")
     print(f"  LUCK:    {player.luck}")
     print(f"\nYour adventure begins...\n")
 
-    current_location = Location("1", adventure)
+    player.move(adventure)
 
-    while player.stamina > 0:
-        print("\n" + "=" * 60)
-        print(current_location.description)
-
-        for monster in current_location.monsters:
-            if monster.stamina > 0:
-                print(f"\nA {monster.name} blocks your path! (SKILL {monster.skill}, STAMINA {monster.stamina})")
-                input("Press Enter to fight...")
-                player.fight(monster)
-                if player.stamina <= 0:
-                    break
-
-        if player.stamina <= 0:
-            break
-
-        if not current_location.exits:
-            print("\nYour quest is complete. Well done, adventurer!")
-            break
-
-        if "lucky" in current_location.exits and "unlucky" in current_location.exits:
-            input("\nPress Enter to Test your Luck...")
-            if player.test_luck():
-                next_id = str(current_location.exits["lucky"])
-            else:
-                next_id = str(current_location.exits["unlucky"])
-            current_location = Location(next_id, adventure)
-            continue
-
-        print(f"\nExits: {', '.join(current_location.exits.keys())}")
-        print(f"  SKILL={player.skill}  STAMINA={player.stamina}  LUCK={player.luck}")
-
-        try:
-            choice = input("\nWhich direction? ").strip().upper()
-        except (EOFError, KeyboardInterrupt):
-            print("\n\nFarewell, adventurer.")
-            break
-        if choice in current_location.exits:
-            next_id = str(current_location.exits[choice])
-            current_location = Location(next_id, adventure)
-        else:
-            print(f"  You can't go that way. Choose from: {', '.join(current_location.exits.keys())}")
-
-    if player.stamina <= 0:
-        print("\nYou have been slain. Your adventure is over.")
 

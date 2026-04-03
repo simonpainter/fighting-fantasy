@@ -1,0 +1,96 @@
+{
+    "config": {
+        "title": "Warlock of Firetop Mountain",
+        "author": "Ian Livingstone & Steve Jackson",
+        "description": ""
+    },
+
+    "1": {
+        "description": "At last your two-day hike is over. You unsheathe your sword, lay it on the ground and sigh with relief as you lower yourself down on to the mossy rocks to sit for a moment's rest. You stretch, rub your eyes and finally look up at Firetop Mountain. The very mountain itself looks menacing. The steep face in front of you looks to have been savaged by the claws of some gargantuan beast. Sharp rocky crags jut out at unnatural angles. At the top of the mountain you can see the eerie red colouring - probably some strange vegetation - which has given the mountain its name. Perhaps no one will ever know exactly what grows up there, as climbing the peak must surely be impossible. Your quest lies ahead of you. Across the clearing is a dark cave entrance. You pick up your sword, get to your feet and consider what dangers may lie ahead of you. But with determination, you thrust the sword home into its scabbard and approach the cave. You peer into the gloom to see dark, slimy walls with pools of water on the stone floor in front of you. The air is cold and dank. You light your lantern and step warily into the blackness. Cobwebs brush your face and you hear the scurrying of tiny feet: rats, most likely. You set off into the cave. After a few yards you arrive at a junction. Will you turn west (turn to 71) or east (turn to 278)?",
+        "exits": {
+            "W": "71",
+            "E": "278"
+        },
+        "monsters": []
+    },
+
+    "71": {
+        "description": "You head west along a torch-lit passage. The corridor opens into a small guardroom. A Goblin sits at a battered table, picking its teeth with a dagger. It leaps up with a screech as you enter. You must fight! After the battle, you notice a door to the north and a passage continuing west.",
+        "exits": {
+            "N": "85",
+            "W": "102",
+            "E": "1"
+        },
+        "monsters": [
+            {
+                "name": "Goblin",
+                "skill": 5,
+                "stamina": 6
+            }
+        ]
+    },
+
+    "85": {
+        "description": "Beyond the door to the north is a storeroom heaped with barrels and sacks. The room appears to be empty. You can search the room or head back south.",
+        "exits": {
+            "S": "71"
+        },
+        "monsters": []
+    },
+
+    "102": {
+        "description": "The corridor bends and you find yourself in a wider chamber. Two Orcs are hunched over a game of dice — they haven't noticed you yet, but that won't last. You can attempt to creep past heading north, or you can charge in fighting.",
+        "exits": {
+            "N": "142",
+            "E": "71"
+        },
+        "monsters": [
+            {
+                "name": "Orc",
+                "skill": 6,
+                "stamina": 7
+            },
+            {
+                "name": "Orc",
+                "skill": 6,
+                "stamina": 6
+            }
+        ]
+    },
+
+    "142": {
+        "description": "You emerge into a long vaulted hall. At the far end, seated on a throne of bones, is the Warlock of Firetop Mountain himself. He regards you with cold amusement. 'Another fool,' he intones, raising his staff. The air crackles with dark energy. You must face him — there is no way back.",
+        "exits": {},
+        "monsters": [
+            {
+                "name": "Warlock of Firetop Mountain",
+                "skill": 10,
+                "stamina": 16
+            }
+        ]
+    },
+
+    "278": {
+        "description": "You head east into a narrow tunnel that reeks of damp and decay. The passage widens into a cavern where a large Skeleton Warrior stands motionless until your lantern light falls upon it — then it raises its rusty sword and advances. Beyond it, a passage leads further east.",
+        "exits": {
+            "E": "304",
+            "W": "1"
+        },
+        "monsters": [
+            {
+                "name": "Skeleton Warrior",
+                "skill": 7,
+                "stamina": 8
+            }
+        ]
+    },
+
+    "304": {
+        "description": "The passage opens into a circular chamber. In the centre is a wooden chest, its lock rusted open. Inside you find a healing potion and a handful of gold coins. A doorway to the north leads onward.",
+        "exits": {
+            "N": "142",
+            "W": "278"
+        },
+        "monsters": []
+    }
+}

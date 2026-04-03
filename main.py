@@ -1,4 +1,5 @@
 import random
+import time
 
 
 class Player:
@@ -7,15 +8,68 @@ class Player:
         self.stamina = random.randint(2, 12) + 12
         self.luck = random.randint(1, 6) + 6
 
-    def fight(self, monster):
+    def test_luck(self):
+        roll = random.randint(2, 12)
+        lucky = roll <= self.luck
+        self.luck -= 1
+        return lucky
+
+    def fight(self, monster, round_delay=1.5):
+        round_num = 0
+
         while self.stamina > 0 and monster.stamina > 0:
-            player_attack = random.randint(2, 12) + self.skill
-            monster_attack = random.randint(2, 12) + monster.skill
+            round_num += 1
+            print(f"\n--- Round {round_num} ---")
+            print(f"  You:     SKILL={self.skill}  STAMINA={self.stamina}  LUCK={self.luck}")
+            print(f"  Monster: SKILL={monster.skill}  STAMINA={monster.stamina}")
+
+            player_roll = random.randint(2, 12)
+            monster_roll = random.randint(2, 12)
+            player_attack = player_roll + self.skill
+            monster_attack = monster_roll + monster.skill
+
+            print(f"\n  You roll {player_roll} + SKILL {self.skill} = Attack Strength {player_attack}")
+            print(f"  Monster rolls {monster_roll} + SKILL {monster.skill} = Attack Strength {monster_attack}")
 
             if player_attack > monster_attack:
-                monster.stamina -= 2
+                print("\n  You HIT the monster!")
+                use_luck = input("  Test your Luck to deal extra damage? (y/n): ").strip().lower()
+                if use_luck == 'y' and self.luck > 0:
+                    if self.test_luck():
+                        monster.stamina -= 4
+                        print(f"  Lucky! You deal 4 damage. Monster STAMINA: {monster.stamina}")
+                    else:
+                        monster.stamina -= 1
+                        print(f"  Unlucky! You deal only 1 damage. Monster STAMINA: {monster.stamina}")
+                else:
+                    monster.stamina -= 2
+                    print(f"  Monster takes 2 damage. Monster STAMINA: {monster.stamina}")
+
             elif monster_attack > player_attack:
-                self.stamina -= 2
+                print("\n  The monster hits you!")
+                use_luck = input("  Test your Luck to reduce damage? (y/n): ").strip().lower()
+                if use_luck == 'y' and self.luck > 0:
+                    if self.test_luck():
+                        self.stamina -= 1
+                        print(f"  Lucky! You take only 1 damage. Your STAMINA: {self.stamina}")
+                    else:
+                        self.stamina -= 3
+                        print(f"  Unlucky! You take 3 damage. Your STAMINA: {self.stamina}")
+                else:
+                    self.stamina -= 2
+                    print(f"  You take 2 damage. Your STAMINA: {self.stamina}")
+
+            else:
+                print("\n  Both attacks deflected — neither side lands a blow.")
+
+            time.sleep(round_delay)
+
+        print("\n" + "=" * 40)
+        if self.stamina > 0:
+            print("  Victory! The monster has been defeated.")
+        else:
+            print("  You have been slain. Your adventure ends here.")
+        print("=" * 40)
 
         return self.stamina > 0
 

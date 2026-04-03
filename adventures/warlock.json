@@ -48,6 +48,31 @@
         "monsters": []
     },
 
+    "92": {
+        "description": "You arrive back at the junction in the passage. You look left to see the cave entrance in the dim distance but walk straight on. Turn to 71.",
+        "exits": {
+            "continue": "71"
+        },
+        "monsters": []
+    },
+
+    "93": {
+        "description": "You arrive back at the junction and this time you turn northwards. Turn to 8.",
+        "exits": {
+            "continue": "8"
+        },
+        "monsters": []
+    },
+
+    "94": {
+        "description": "You walk along a passageway that runs due south, then turns west. After several metres, it ends at a three-way junction. You can check for secret passages along the way (turn to 260) or go straight to the junction (turn to 329).",
+        "exits": {
+            "search": "260",
+            "continue": "329"
+        },
+        "monsters": []
+    },
+
     "277": {
         "description": "You are in a short passageway which comes to a dead end several metres ahead of you. You may search for secret passages (turn to 146), or you may return to the crossroads and either follow the passage ahead to the north (turn to 11), or turn to the west (turn to 366).",
         "exits": {

@@ -15,81 +15,54 @@
     },
 
     "71": {
-        "description": "You head west along a torch-lit passage. The corridor opens into a small guardroom. A Goblin sits at a battered table, picking its teeth with a dagger. It leaps up with a screech as you enter. You must fight! After the battle, you notice a door to the north and a passage continuing west.",
+        "description": "There is a right-hand turn to the north in the passage. Cautiously you approach a sentry post on the corner and, as you look in, you can see a strange Goblin-like creature in leather armour asleep at his post. You try to tiptoe past him. Test your Luck. If you are Lucky, he does not wake up and remains snoring loudly - turn to 301. If you are Unlucky, you step with a crunch on some loose ground and his eyes flick open - turn to 248.",
         "exits": {
-            "N": "85",
-            "W": "102",
-            "E": "1"
-        },
-        "monsters": [
-            {
-                "name": "Goblin",
-                "skill": 5,
-                "stamina": 6
-            }
-        ]
-    },
-
-    "85": {
-        "description": "Beyond the door to the north is a storeroom heaped with barrels and sacks. The room appears to be empty. You can search the room or head back south.",
-        "exits": {
-            "S": "71"
+            "lucky": "301",
+            "unlucky": "248"
         },
         "monsters": []
     },
 
-    "102": {
-        "description": "The corridor bends and you find yourself in a wider chamber. Two Orcs are hunched over a game of dice — they haven't noticed you yet, but that won't last. You can attempt to creep past heading north, or you can charge in fighting.",
+    "72": {
+        "description": "You now have a fresh set of armour, equivalent to your own. Decide which of the two you wish to keep, throw the other away, and turn to 319.",
         "exits": {
-            "N": "142",
-            "E": "71"
+            "continue": "319"
         },
-        "monsters": [
-            {
-                "name": "Orc",
-                "skill": 6,
-                "stamina": 7
-            },
-            {
-                "name": "Orc",
-                "skill": 6,
-                "stamina": 6
-            }
-        ]
+        "monsters": []
     },
 
-    "142": {
-        "description": "You emerge into a long vaulted hall. At the far end, seated on a throne of bones, is the Warlock of Firetop Mountain himself. He regards you with cold amusement. 'Another fool,' he intones, raising his staff. The air crackles with dark energy. You must face him — there is no way back.",
-        "exits": {},
-        "monsters": [
-            {
-                "name": "Warlock of Firetop Mountain",
-                "skill": 10,
-                "stamina": 16
-            }
-        ]
+    "73": {
+        "description": "The passage ahead leads you northwards. The rocky floor becomes sandy until eventually you are walking on a sort of coarse sand. You notice the passage is widening and ahead you can hear a flowing river. You continue until you find yourself in a large cavern through which a river flows. Turn to 218.",
+        "exits": {
+            "continue": "218"
+        },
+        "monsters": []
+    },
+
+    "74": {
+        "description": "Test your Luck. If you are Lucky, you break his gaze and can prepare to attack. Turn to 279. If you are Unlucky, as you move over towards the second body, you accidentally kick the third corpse on the floor. Its eyes flick open and it quickly sits up and slashes at you with its long, sharp fingernails. Test your Luck. If you are Lucky, the creature misses. If you are Unlucky, it has caught you across the leg and you suffer 1 STAMINA point's worth of damage. Turn to 230.",
+        "exits": {
+            "lucky": "279",
+            "unlucky": "230"
+        },
+        "monsters": []
+    },
+
+    "277": {
+        "description": "You are in a short passageway which comes to a dead end several metres ahead of you. You may search for secret passages (turn to 146), or you may return to the crossroads and either follow the passage ahead to the north (turn to 11), or turn to the west (turn to 366).",
+        "exits": {
+            "search": "146",
+            "N": "11",
+            "W": "366"
+        },
+        "monsters": []
     },
 
     "278": {
-        "description": "You head east into a narrow tunnel that reeks of damp and decay. The passage widens into a cavern where a large Skeleton Warrior stands motionless until your lantern light falls upon it — then it raises its rusty sword and advances. Beyond it, a passage leads further east.",
+        "description": "The passageway soon comes to an end at a locked wooden door. You listen at the door but hear nothing. Will you try to charge the door down? If so, turn to 156. If you would rather turn round and go back to the junction, turn to 92.",
         "exits": {
-            "E": "304",
-            "W": "1"
-        },
-        "monsters": [
-            {
-                "name": "Skeleton Warrior",
-                "skill": 7,
-                "stamina": 8
-            }
-        ]
-    },
-
-    "304": {
-        "description": "The passage opens into a circular chamber. In the centre is a wooden chest, its lock rusted open. Inside you find a healing potion and a handful of gold coins. A doorway to the north leads onward.",
-        "exits": {
-            "N": "142",
-            "W": "278"
+            "charge": "156",
+            "back": "92"
         },
         "monsters": []
     }

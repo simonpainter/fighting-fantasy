@@ -1,49 +1,75 @@
 # Fighting Fantasy
 
-A digital implementation of the classic Fighting Fantasy gamebook adventure system.
+A Python engine for running text-based adventure games in the style of the classic [Fighting Fantasy](https://en.wikipedia.org/wiki/Fighting_Fantasy) gamebook series, created by Steve Jackson and Ian Livingstone.
 
 ## Overview
 
-This project brings the iconic Fighting Fantasy tabletop RPG experience to life in a digital format. Players can explore branching narratives, manage their character's stats, and battle enemies using the classic dice-based combat system.
+Fighting Fantasy gamebooks are single-player role-playing adventures first published in 1982. Each book is divided into numbered sections; the reader makes choices that jump between sections, resolving combat and challenges with two six-sided dice and three character attributes: **SKILL**, **STAMINA**, and **LUCK**.
+
+This project provides a Python game engine that faithfully recreates that experience in the terminal — branching narrative, dice-based combat, inventory, and all.
 
 ## Features
 
-- **Character creation** — Roll your SKILL, STAMINA, and LUCK attributes
-- **Turn-based combat** — Fight monsters using the classic Fighting Fantasy combat rules
-- **Branching narrative** — Make choices that shape your adventure
-- **Inventory management** — Collect items, provisions, and equipment
-- **Dice mechanics** — Faithful recreation of the two-dice system from the books
+- **Branching narrative engine** — section-based story graph where player choices drive progression
+- **Character creation** — roll SKILL, STAMINA, and LUCK at the start of each adventure
+- **Turn-based combat** — faithful implementation of the Fighting Fantasy combat rules
+- **Luck tests** — Test your Luck to modify outcomes, at the cost of your LUCK score
+- **Inventory management** — collect and use items and provisions throughout your adventure
+- **Adventure data format** — define adventures in structured data files; no code changes needed
 
 ## Getting Started
 
 ### Prerequisites
 
-> Add your runtime/language requirements here (e.g., Node.js, Python, etc.)
+- Python 3.10+
 
 ### Installation
 
 ```bash
 git clone https://github.com/simonpainter/fighting-fantasy.git
 cd fighting-fantasy
+pip install -r requirements.txt
 ```
-
-> Add installation steps here.
 
 ### Running
 
-> Add run instructions here.
+```bash
+python main.py adventures/warlock.json
+```
 
 ## How to Play
 
-Characters have three core attributes:
+### Character Attributes
 
-| Attribute | Description |
-|-----------|-------------|
-| **SKILL** | Combat ability and dexterity (rolled as 1d6 + 6) |
-| **STAMINA** | Health points (rolled as 2d6 + 12) |
-| **LUCK** | Fortune and fate (rolled as 1d6 + 6) |
+At the start of an adventure your character's attributes are rolled randomly:
 
-Combat is resolved each round by both sides rolling 2d6 and adding their SKILL. The higher total hits the opponent, reducing their STAMINA by 2. A tie means both miss.
+| Attribute | Roll | Description |
+|-----------|------|-------------|
+| **SKILL** | 1d6 + 6 | Combat prowess and dexterity (max 12) |
+| **STAMINA** | 2d6 + 12 | Health — reach 0 and you're dead (max 24) |
+| **LUCK** | 1d6 + 6 | Fortune — decreases each time you test it (max 12) |
+
+### Combat
+
+Each combat round, both you and your opponent roll 2d6 and add your respective SKILL scores to get an **Attack Strength**. The higher value wins the round and deals **2 points of STAMINA** damage to the loser. A tie means both miss.
+
+### Testing Your Luck
+
+Roll 2d6. If the result is ≤ your current LUCK score you are **Lucky** — your LUCK then decreases by 1 regardless of outcome.
+
+## Project Structure
+
+```
+fighting-fantasy/
+├── main.py          # Entry point
+├── engine/          # Core game engine
+│   ├── game.py      # Game loop and section navigation
+│   ├── character.py # Character attributes and dice rolling
+│   ├── combat.py    # Combat resolution
+│   └── inventory.py # Inventory management
+├── adventures/      # Adventure data files
+└── tests/           # Unit tests
+```
 
 ## Contributing
 

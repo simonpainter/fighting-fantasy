@@ -1,0 +1,111 @@
+{
+    "config": {
+        "title": "The Cave of Shadows",
+        "author": "Example Adventure",
+        "description": "A short demonstration adventure for the Fighting Fantasy engine."
+    },
+
+    "1": {
+        "description": "You stand at the entrance to a cave carved into the base of a great black cliff. A cold wind blows from within, carrying the faint smell of smoke and something worse. Your lantern casts a small circle of light on the damp stone floor. The passage ahead splits almost immediately. To the west you can hear the distant drip of water. To the east a faint orange glow flickers against the walls. Which way will you go?",
+        "exits": {
+            "W": "2",
+            "E": "3"
+        },
+        "monsters": []
+    },
+
+    "2": {
+        "description": "The western passage slopes downward and opens into a low-ceilinged chamber. In the centre, hunched over a small fire, sits a GOBLIN SCOUT. It leaps to its feet with a screech and draws a jagged knife. You must fight! If you survive, a narrow tunnel leads further north.",
+        "exits": {
+            "N": "4"
+        },
+        "monsters": [
+            {
+                "name": "Goblin Scout",
+                "skill": 5,
+                "stamina": 6
+            }
+        ]
+    },
+
+    "3": {
+        "description": "The eastern passage leads to a rope bridge spanning a deep underground chasm. The planks are slick with moisture and the ropes creak ominously under your weight. You must cross carefully. Roll one die — a roll of 6 means a plank gives way beneath you and you plunge into the darkness below (turn to 9). Any other result and you reach the far side safely (turn to 5).",
+        "mechanic": "dice_roll",
+        "mechanic_data": {
+            "dice": 1,
+            "fail_values": [6]
+        },
+        "exits": {
+            "lucky": "5",
+            "unlucky": "9"
+        },
+        "monsters": []
+    },
+
+    "4": {
+        "description": "The northern tunnel opens into a vaulted hall lit by glowing crystals embedded in the walls. In the far corner a heavy iron chest sits unlocked and slightly ajar. As you approach, a CAVE SPIDER drops from the ceiling on a thread of silk, mandibles clicking. Fight it — if you win, you may search the chest and continue east to section 6.",
+        "exits": {
+            "E": "6"
+        },
+        "monsters": [
+            {
+                "name": "Cave Spider",
+                "skill": 6,
+                "stamina": 5
+            }
+        ]
+    },
+
+    "5": {
+        "description": "You step off the bridge onto solid ground and pause to catch your breath. The passage ahead is guarded by a STONE SENTINEL — a squat armoured figure that grinds to life as you approach. Beyond it, a doorway leads to the inner sanctum. Fight or flee south back across the bridge (turn to 3).",
+        "exits": {
+            "fight won": "8",
+            "S": "3"
+        },
+        "monsters": [
+            {
+                "name": "Stone Sentinel",
+                "skill": 8,
+                "stamina": 10
+            }
+        ]
+    },
+
+    "6": {
+        "description": "A long corridor stretches eastward. Halfway along, a section of the floor looks discoloured — a possible pressure plate. You could tiptoe across and Test your Luck, or detour through a crawl space to the south that avoids it entirely (turn to 7).",
+        "exits": {
+            "S": "7",
+            "lucky": "8",
+            "unlucky": "10"
+        },
+        "monsters": []
+    },
+
+    "7": {
+        "description": "The crawl space is tight and your pack catches on every jutting rock, but you emerge unharmed into the corridor beyond the pressure plate. Ahead the passage widens into the inner sanctum. Turn to 8.",
+        "exits": {
+            "continue": "8"
+        },
+        "monsters": []
+    },
+
+    "8": {
+        "description": "You step into the inner sanctum. At its centre, on a plinth of black obsidian, rests a glowing gemstone — the Eye of Shadows, your goal. As you close your fingers around it, a warmth spreads up your arm and the cave begins to tremble. You run. Moments later you burst out into daylight, the gemstone safe in your pack. Your quest is complete. Well done, adventurer!",
+        "exits": {},
+        "monsters": []
+    },
+
+    "9": {
+        "description": "You fall. The darkness swallows you whole. Your adventure ends at the bottom of the chasm.",
+        "exits": {},
+        "monsters": []
+    },
+
+    "10": {
+        "description": "The pressure plate fires a dart from the wall. It catches you in the shoulder for 2 STAMINA damage. Wincing, you press on to the inner sanctum. Turn to 8.",
+        "exits": {
+            "continue": "8"
+        },
+        "monsters": []
+    }
+}

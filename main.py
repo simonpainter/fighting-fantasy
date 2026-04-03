@@ -11,9 +11,14 @@ class Player:
         self.luck = random.randint(1, 6) + 6
 
     def test_luck(self):
-        roll = random.randint(2, 12)
+        roll = random.randint(1, 6) + random.randint(1, 6)
         lucky = roll <= self.luck
         self.luck -= 1
+        print(f"\n  Testing Luck: rolled {roll} against LUCK score of {self.luck + 1}")
+        if lucky:
+            print(f"  You are Lucky! (LUCK is now {self.luck})")
+        else:
+            print(f"  You are Unlucky! (LUCK is now {self.luck})")
         return lucky
 
     def fight(self, monster, round_delay=1.5):

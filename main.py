@@ -148,6 +148,15 @@ if __name__ == "__main__":
             print("\nYour quest is complete. Well done, adventurer!")
             break
 
+        if "lucky" in current_location.exits and "unlucky" in current_location.exits:
+            input("\nPress Enter to Test your Luck...")
+            if player.test_luck():
+                next_id = str(current_location.exits["lucky"])
+            else:
+                next_id = str(current_location.exits["unlucky"])
+            current_location = Location(next_id, adventure)
+            continue
+
         print(f"\nExits: {', '.join(current_location.exits.keys())}")
         print(f"  SKILL={player.skill}  STAMINA={player.stamina}  LUCK={player.luck}")
 

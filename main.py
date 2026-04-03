@@ -6,3 +6,9 @@ class Player:
         self.skill = random.randint(1, 6) + 6
         self.stamina = random.randint(2, 12) + 12
         self.luck = random.randint(1, 6) + 6
+
+
+class Monster:
+    def __init__(self, skill, stamina):
+        self.skill = skill
+        self.stamina = stamina

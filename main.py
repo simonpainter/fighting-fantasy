@@ -117,14 +117,15 @@ class Player:
             print(f"  SKILL={self.skill}  STAMINA={self.stamina}  LUCK={self.luck}")
 
             try:
-                choice = input("\nWhich direction? ").strip().upper()
+                choice = input("\nWhich direction? ").strip()
             except (EOFError, KeyboardInterrupt):
                 print("\n\nFarewell, adventurer.")
                 break
 
-            if choice in self.location.exits:
+            matched = next((k for k in self.location.exits if k.upper() == choice.upper()), None)
+            if matched:
                 try:
-                    self.location = Location(str(self.location.exits[choice]), adventure)
+                    self.location = Location(str(self.location.exits[matched]), adventure)
                 except KeyError as e:
                     print(f"\n  {e}")
                     break

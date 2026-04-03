@@ -1,4 +1,6 @@
+import json
 import random
+import sys
 import time
 
 
@@ -78,3 +80,31 @@ class Monster:
     def __init__(self, skill, stamina):
         self.skill = skill
         self.stamina = stamina
+
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python main.py <path/to/adventure.json>")
+        sys.exit(1)
+
+    adventure_file = sys.argv[1]
+    try:
+        with open(adventure_file) as f:
+            adventure = json.load(f)
+    except FileNotFoundError:
+        print(f"Error: Adventure file '{adventure_file}' not found.")
+        sys.exit(1)
+    except json.JSONDecodeError as e:
+        print(f"Error: Could not parse adventure file — {e}")
+        sys.exit(1)
+
+    player = Player()
+    print("=" * 40)
+    print("  Welcome to Fighting Fantasy!")
+    print("=" * 40)
+    print(f"\nYour character has been created:")
+    print(f"  SKILL:   {player.skill}")
+    print(f"  STAMINA: {player.stamina}")
+    print(f"  LUCK:    {player.luck}")
+    print(f"\nYour adventure begins...\n")

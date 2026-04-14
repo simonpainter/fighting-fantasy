@@ -10,6 +10,7 @@ class Player:
         self.stamina = random.randint(1, 6) + random.randint(1, 6) + 12
         self.luck = random.randint(1, 6) + 6
         self.location = None
+        self.return_to = None
 
     def roll_die(self, num_dice=1):
         return sum(random.randint(1, 6) for _ in range(num_dice))
@@ -91,6 +92,17 @@ class Player:
             print("\n" + "=" * 60)
             print(self.location.description)
 
+            if self.location.mechanic == "random_encounter" and not self.location.monsters:
+                input("\nPress Enter to roll a die to see what creature appears...")
+                roll = self.roll_die(1)
+                table = self.location.mechanic_data.get("table", {})
+                monster_data = table.get(str(roll))
+                if monster_data:
+                    self.location.monsters = [Monster(monster_data["name"], monster_data["skill"], monster_data["stamina"])]
+                    print(f"\n  You rolled a {roll} — a {monster_data['name']} appears!")
+                else:
+                    print(f"\n  You rolled a {roll} — no creature appears.")
+
             for monster in self.location.monsters:
                 if monster.stamina > 0:
                     print(f"\nA {monster.name} blocks your path! (SKILL {monster.skill}, STAMINA {monster.stamina})")
@@ -101,6 +113,28 @@ class Player:
 
             if self.stamina <= 0:
                 break
+
+            if self.location.mechanic == "fight" and "fight" in self.location.exits:
+                self.return_to = self.location.id
+                try:
+                    self.location = Location(str(self.location.exits["fight"]), adventure)
+                except KeyError as e:
+                    print(f"\n  {e}")
+                    break
+                continue
+
+            if self.location.mechanic in ("return", "random_encounter"):
+                if self.return_to:
+                    return_id = self.return_to
+                    self.return_to = None
+                    try:
+                        self.location = Location(return_id, adventure)
+                    except KeyError as e:
+                        print(f"\n  {e}")
+                        break
+                    continue
+                else:
+                    print("\n  (No return destination recorded — continuing normally.)")
 
             if not self.location.exits:
                 print("\nYour quest is complete. Well done, adventurer!")

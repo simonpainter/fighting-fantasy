@@ -45,6 +45,53 @@ Mechanic sections add optional fields:
 
 ---
 
+## Multi-Page Batch Strategy
+
+When given a group of page images to process, follow this workflow rather than parsing each image immediately as you encounter it.
+
+### Phase 1 — Transcribe all pages to temporary files
+
+For every page image, write the raw visible text to a temporary file (e.g. `page_001.txt`, `page_002.txt`, …) **without attempting to parse JSON yet**. Capture everything exactly as printed:
+
+- Section numbers
+- All narrative text, including partial sections that run off the bottom of the page
+- SKILL / STAMINA monster stats
+- "Turn to N" references
+- Any mechanic instructions (Test your Luck, Roll one die, etc.)
+
+Do not discard or summarise — accuracy at this stage prevents errors later.
+
+### Phase 2 — Establish page order and section boundaries
+
+Read through all temporary files to build a map of which sections appear on which pages. A section may span multiple pages:
+
+- A page ending mid-sentence means the section continues on the next page.
+- A page beginning mid-sentence (no section number at the top) is a continuation of the previous page's last section.
+- A single page may contain several complete sections plus a partial one at the end.
+
+Construct an ordered list of sections, noting which temporary files contribute to each:
+
+```
+Section 7  → page_003.txt (partial start) + page_004.txt (completion)
+Section 8  → page_004.txt
+Section 9  → page_004.txt (partial start) + page_005.txt (completion)
+```
+
+Only proceed to Phase 3 once every section has all its contributing pages identified.
+
+### Phase 3 — Parse sections one by one into JSON
+
+Work through the ordered section list. For each section:
+
+1. Concatenate the relevant text fragments from the temporary files in page order.
+2. Apply the parsing rules below to produce the JSON entry.
+3. Append the entry to the target adventure JSON file.
+4. Verify the entry before moving to the next section.
+
+Delete the temporary files once all sections have been written successfully.
+
+---
+
 ## Step-by-Step Parsing Rules
 
 ### 1. Identify the Section Number

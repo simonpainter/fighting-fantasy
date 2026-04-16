@@ -1,2 +1,5 @@
 # Adventure data files (contain copyrighted content)
 adventures/*.json
+
+# Other things to ignore
+.DS_Store

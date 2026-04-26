@@ -38,6 +38,18 @@ No additional dependencies — the engine uses the Python standard library only.
 python3 main.py adventures/your_adventure.json
 ```
 
+### Running the test suite
+
+The repository ships with a comprehensive unittest suite covering static
+validation of adventure files, every mechanic, the inventory system, and
+known winning paths through `adventures/warlock.json`:
+
+```bash
+python3 -m unittest discover tests -v
+```
+
+All tests use the standard library only and run in well under a second.
+
 ## How to Play
 
 ### Character Attributes

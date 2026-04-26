@@ -3,3 +3,4 @@ adventures/*.json
 
 # Other things to ignore
 .DS_Store
+*.bak

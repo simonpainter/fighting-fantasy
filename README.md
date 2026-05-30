@@ -449,7 +449,13 @@ fighting-fantasy/
 
 ## Contributing
 
-Pull requests are welcome. Please open an issue first to discuss significant changes.
+Pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup and
+workflow details.
+
+Please also review:
+
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Security Policy](SECURITY.md)
 
 ## Licence
 
